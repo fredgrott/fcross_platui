@@ -83,7 +83,12 @@ Future<void> main() async {
       // app exceptions provider. We do not need this in Profile mode.
       // ignore: no-empty-block
       if (isInReleaseMode) {
-       //Zone.current.handleUncaughtError(details.exception,  details.stack);
+       // FlutterError class has something not changed as far as null safety 
+        // so I just assume we do not have a stack trace but still want the 
+        // detail of the exception. 
+        Zone.current.handleUncaughtError(details.exception, StackTrace.empty);
+        //Zone.current.handleUncaughtError(details.exception,  details.stack);
+
       }
     }
   };

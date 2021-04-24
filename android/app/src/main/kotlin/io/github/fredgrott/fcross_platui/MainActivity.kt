@@ -1,9 +1,14 @@
 package io.github.fredgrott.fcross_platui
 
+import android.os.Build
+import android.view.WindowManager
+import androidx.annotation.RequiresApi
+import androidx.core.view.WindowCompat
 import io.flutter.embedding.android.FlutterActivity
 
 class MainActivity: FlutterActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onPostResume() {
         super.onPostResume()
 
