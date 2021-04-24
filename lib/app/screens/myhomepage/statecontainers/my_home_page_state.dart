@@ -6,8 +6,14 @@
 
 import 'package:fcross_platui/app/data/models/counter_mixin.dart';
 import 'package:fcross_platui/app/screens/myhomepage/managers/my_home_page.dart';
+import 'package:fcross_platui/app/themes/my_cupertino_navigation_bar_data.dart';
+import 'package:fcross_platui/app/themes/my_cupertino_page_scaffold_data.dart';
+import 'package:fcross_platui/app/themes/my_material_app_bar_data.dart';
+import 'package:fcross_platui/app/themes/my_material_scaffold_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 
 class MyHomePageState extends State<MyHomePage> with CounterMixin{
@@ -25,6 +31,7 @@ class MyHomePageState extends State<MyHomePage> with CounterMixin{
   }
 
   @override
+  // ignore: long-method
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -32,47 +39,97 @@ class MyHomePageState extends State<MyHomePage> with CounterMixin{
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$myCounter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.dark.copyWith(
+          statusBarColor: Colors.transparent,
+          
+          systemNavigationBarColor: Colors.transparent,
+          systemNavigationBarDividerColor: Colors.transparent,
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        // ignore: prefer-trailing-comma
+        child: PlatformScaffold(
+          material: (
+            _,
+            __,
+          ) =>
+              myMaterialScaffoldData,
+          cupertino: (
+            _,
+            __,
+          ) =>
+              myCupertinoPageScaffoldData,
+          
+          
+          appBar: PlatformAppBar(
+            backgroundColor: Colors.transparent,
+            title: PlatformText('Base River'),
+            material: (
+              _,
+              __,
+            ) =>
+                myMaterialAppBarData,
+            cupertino: (_, __) => myCupertinoNavigationBarData,
+            trailingActions: <Widget>[
+              PlatformIconButton(
+                padding: EdgeInsets.zero,
+                icon: Icon(context.platformIcons.share),
+                color: Colors.black87,
+                // ignore: no-empty-block
+                onPressed: () {},
+              ),
+            ],
+          ),
+          // using stack to place background image at bottom and layer content on top
+          body: Stack(children: <Widget>[
+            Center(
+                // ignore: prefer-trailing-comma
+                child: Container(
+                    // have to instruct the DecoratedBox to expand to the
+                    // expanded container size as we set body extended
+                    constraints: const BoxConstraints.expand(),
+                    // ignore: prefer-trailing-comma
+                    decoration: const BoxDecoration(
+                        // ignore: prefer-trailing-comma
+                        image: DecorationImage(
+                      image: AssetImage("images/background.jpg"),
+                      fit: BoxFit.cover,
+                    )))),
+            Center(
+                // ignore: prefer-trailing-comma
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                PlatformText("increment or decrement"),
+                PlatformText(
+              '$myCounter',
+              
+            ),
+
+              ],
+            )),
+            // since  we are using a parent stack container we can fake a cross-platform non-nav-fab with
+            // a positioned container that contains buttons
+            // ignore: prefer-trailing-comma
+            Positioned(
+                bottom: 54,
+                right: 34,
+                // ignore: prefer-trailing-comma
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    // ignore: prefer-trailing-comma
+                    children: <Widget>[
+                      PlatformIconButton(
+                        onPressed: () {
+                          _incrementCounter();
+                        },
+                        padding: EdgeInsets.zero,
+                        icon: Icon(context.platformIcons.addCircledSolid),
+                      ),
+                      
+                    ]))
+          ]),
+        ));
   }
 }
+
+  
