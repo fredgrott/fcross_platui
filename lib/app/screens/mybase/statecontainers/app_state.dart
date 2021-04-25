@@ -8,6 +8,7 @@ import 'dart:ui';
 import 'package:catcher/catcher.dart';
 import 'package:fcross_platui/app/screens/mybase/managers/my_base.dart';
 import 'package:fcross_platui/app/screens/myhomepage/managers/my_home_page.dart';
+import 'package:fcross_platui/app/shared/app_title.dart';
 import 'package:fcross_platui/app/themes/my_cupertino_color_scheme.dart';
 import 'package:fcross_platui/app/themes/my_cupertino_text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,12 +24,13 @@ class AppState extends State<MyBase> {
         data:
             brightness == Brightness.light ? ThemeData.from(colorScheme: const ColorScheme.light()) : ThemeData.from(colorScheme: const ColorScheme.dark()),
         child: PlatformProvider(
+          //initialPlatform: TargetPlatform.iOS,
           //no do not make const
           // ignore: prefer_const_constructors
           // ignore: prefer-trailing-comma
           builder: (context) => PlatformApp(
                 // getx settings go here
-
+                
                 debugShowCheckedModeBanner: false,
                 navigatorKey: Catcher.navigatorKey,
 
@@ -70,8 +72,8 @@ class AppState extends State<MyBase> {
                    //   Future<dynamic>.delayed(const Duration(seconds: 5)),
                   //startAnimation: 'tree',
                 //),
-                home: const MyHomePage( title: 'FCross Platui',),
-                //initialPlatform: TargetPlatform.iOS,
+                home: const MyHomePage( title: appTitle),
+                
               )),
         );
   }

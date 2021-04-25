@@ -6,6 +6,7 @@
 
 import 'package:fcross_platui/app/data/models/counter_mixin.dart';
 import 'package:fcross_platui/app/screens/myhomepage/managers/my_home_page.dart';
+import 'package:fcross_platui/app/shared/app_title.dart';
 import 'package:fcross_platui/app/themes/my_cupertino_navigation_bar_data.dart';
 import 'package:fcross_platui/app/themes/my_cupertino_page_scaffold_data.dart';
 import 'package:fcross_platui/app/themes/my_material_app_bar_data.dart';
@@ -62,7 +63,7 @@ class MyHomePageState extends State<MyHomePage> with CounterMixin{
           
           appBar: PlatformAppBar(
             backgroundColor: Colors.transparent,
-            title: PlatformText('Base River'),
+            title: PlatformText(appTitle),
             material: (
               _,
               __,
