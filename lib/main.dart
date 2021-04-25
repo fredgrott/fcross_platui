@@ -6,7 +6,8 @@
 import 'dart:async';
 
 import 'package:catcher/catcher.dart';
-import 'package:fcross_platui/app/modules/my_app.dart';
+
+import 'package:fcross_platui/app/screens/mybase/managers/my_base.dart';
 import 'package:fcross_platui/app/shared/build_modes.dart';
 import 'package:fcross_platui/app/shared/init_log.dart';
 import 'package:fcross_platui/app/shared/log_exception.dart';
@@ -100,7 +101,7 @@ Future<void> main() async {
       Catcher(
           runAppFunction: () {
             runApp(
-              MyApp(),
+              MyBase(),
             );
           },
           debugConfig: debugOptions,

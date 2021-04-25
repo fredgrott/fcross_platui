@@ -4,7 +4,8 @@
 
 
 
-import 'package:fcross_platui/app/modules/my_app.dart';
+
+import 'package:fcross_platui/app/screens/mybase/managers/my_base.dart';
 import 'package:fcross_platui/app/screens/myhomepage/managers/my_home_page.dart';
 import 'package:flutter/widgets.dart';
 
@@ -18,8 +19,8 @@ void main() {
    WidgetsFlutterBinding.ensureInitialized();
   group('Basic Golden Tests ', () {
     testWidgets('Golden test', (WidgetTester tester) async {
-      await tester.pumpWidget(MyApp());
-      await expectLater(find.byType(MyApp), matchesGoldenFile('main.png'));
+      await tester.pumpWidget(MyBase());
+      await expectLater(find.byType(MyBase), matchesGoldenFile('main.png'));
     });
     testGoldens('DeviceBuilder ', (tester) async {
       final builder = DeviceBuilder()

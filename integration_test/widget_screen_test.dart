@@ -10,7 +10,8 @@
 
 
 
-import 'package:fcross_platui/app/modules/my_app.dart';
+
+import 'package:fcross_platui/app/screens/mybase/managers/my_base.dart';
 import 'package:flutter/material.dart';
 
 
@@ -44,7 +45,7 @@ void main() {
     // use runAsync when yu have calls to such things as Future.delayed in the testWidgets
     testWidgets("Integration Counter increments smoke test", (WidgetTester tester) async {
       // Build our app and trigger a frame.
-      await tester.pumpWidget(MyApp());
+      await tester.pumpWidget(MyBase());
 
       // Verify that our counter starts at 0.
       expect(find.text('0'), findsOneWidget);
@@ -62,7 +63,7 @@ void main() {
     });
 
     testWidgets('validate appbar widget', (WidgetTester tester) async {
-      await tester.pumpWidget(MyApp());
+      await tester.pumpWidget(MyBase());
       find.ancestor(of: find.byType(AppBar), matching: find.text('Flutter Defanged'));
     });
 
